@@ -27,7 +27,7 @@ local Camera = workspace.CurrentCamera
 --========================================================--
 
 local KEY_CORRECTA = "1"
-local DISCORD_LINK = "https://discord.gg/yNsdDsxeT"
+local DISCORD_LINK = "https://discord.gg/WvfdnxKRD"
 local CFG_FILE = "chinoinfierno_settings.txt"
 local HasEnteredPanel = false
 
@@ -430,7 +430,7 @@ task.wait(1.4)
 TweenService:Create(Intro, TweenInfo.new(1.0, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {TextTransparency = 1}):Play()
 task.wait(1.0)
 
-Intro.Text = "CHINOINFIERNOHUB"
+Intro.Text = "CHRISS-CRACKED"
 Intro.Font = Enum.Font.GothamMedium
 TweenService:Create(Intro, TweenInfo.new(1.2, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()
 task.wait(1.4)
