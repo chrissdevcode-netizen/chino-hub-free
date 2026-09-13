@@ -26,7 +26,7 @@ local Camera = workspace.CurrentCamera
 -- CONFIGURACIÓN
 --========================================================--
 
-local KEY_CORRECTA = "1"
+local KEY_CORRECTA = "chriss-hack"
 local DISCORD_LINK = "https://discord.gg/WvfdnxKRD"
 local CFG_FILE = "chinoinfierno_settings.txt"
 local HasEnteredPanel = false
