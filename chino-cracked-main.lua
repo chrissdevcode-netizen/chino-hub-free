@@ -26,7 +26,7 @@ local Camera = workspace.CurrentCamera
 -- CONFIGURACIÓN
 --========================================================--
 
-local KEY_CORRECTA = "1"
+local KEY_CORRECTA = "chriss-hack"
 local DISCORD_LINK = "https://discord.gg/WvfdnxKRD"
 local CFG_FILE = "chinoinfierno_settings.txt"
 local HasEnteredPanel = false
@@ -3497,4 +3497,62 @@ end
 -- VALIDACIÓN CON PANDAAUTH V4 / KEY
 --========================================================--
 
---NO KEY 😂
+
+Login.MouseButton1Click:Connect(function()
+    local key = KeyInput.Text:gsub("%s+", "")
+
+    if key == "" then
+        StatusLabel.TextColor3 = Color3.fromRGB(255, 60, 60)
+        StatusLabel.Text = "Escribe una key primero"
+        return
+    end
+
+    StatusLabel.TextColor3 = Color3.fromRGB(240, 240, 245)
+    StatusLabel.Text = "Verificando en PandaAuth..."
+
+    local success, reason, isPremium = false, "UNKNOWN", false
+
+    local ok, err = pcall(function()
+        if PandaAuthV4 and PandaAuthV4.ValidateEx then
+            success, reason, isPremium = PandaAuthV4.ValidateEx(key)
+        elseif key == KEY_CORRECTA then
+            success, reason, isPremium = true, "VALID", false
+        else
+            success, reason, isPremium = false, "INVALID_KEY", false
+        end
+    end)
+
+    if not ok then
+        StatusLabel.TextColor3 = Color3.fromRGB(255, 60, 60)
+        StatusLabel.Text = "Error de autenticaciÃ³n"
+        warn("PandaAuth:", err)
+        return
+    end
+
+    if success then
+        StatusLabel.TextColor3 = Color3.fromRGB(60, 255, 120)
+        StatusLabel.Text = "Â¡Key vÃ¡lida! Cargando CHINOINFIERNO..."
+
+        Underline.BackgroundColor3 = Color3.fromRGB(50, 220, 130)
+        task.wait(0.4)
+        OpenMainHub()
+        return
+    end
+
+    StatusLabel.TextColor3 = Color3.fromRGB(255, 60, 60)
+    Underline.BackgroundColor3 = Color3.fromRGB(255, 70, 70)
+    if reason == "INVALID_KEY" then
+        StatusLabel.Text = "Key invÃ¡lida"
+    elseif reason == "EXPIRED" then
+        StatusLabel.Text = "Key expirada"
+    else
+        StatusLabel.Text = "Acceso denegado: " .. tostring(reason)
+    end
+
+    local original = Card.Position
+    TweenService:Create(Card, TweenInfo.new(.07), {Position = original + UDim2.new(0, 7, 0, 0)}):Play()
+    task.wait(.07)
+    TweenService:Create(Card, TweenInfo.new(.07), {Position = original - UDim2.new(0, 7, 0, 0)}):Play()
+    task.wait(.07)
+    TweenService:Create(Card, TweenInfo.new(.07), {Position = original}):Play()
+end)
